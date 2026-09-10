@@ -7,3 +7,9 @@ variable "project_name" {
   description = "Nome do projeto para padronizar os nomes dos recursos"
   type        = string
 }
+
+variable "environment" {
+  description = "Identificador do ambiente de implantação"
+  type        = string
+  default     = "dev"
+}
