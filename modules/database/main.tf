@@ -12,7 +12,7 @@
 # Libera acesso à porta 5432 (PostgreSQL) exclusivamente para recursos dentro da VPC
 resource "aws_security_group" "postgres_sg" {
   name        = "${var.project_name}-postgres-sg-${var.environment}"
-  description = "Permite tráfego PostgreSQL interno da VPC"
+  description = "Permite trafego PostgreSQL interno da VPC"
   vpc_id      = var.vpc_id
 
   ingress {
@@ -38,7 +38,7 @@ resource "aws_security_group" "postgres_sg" {
 # Libera acesso à porta 6379 (Redis) exclusivamente para recursos dentro da VPC
 resource "aws_security_group" "redis_sg" {
   name        = "${var.project_name}-redis-sg-${var.environment}"
-  description = "Permite tráfego Redis interno da VPC"
+  description = "Permite trafego Redis interno da VPC"
   vpc_id      = var.vpc_id
 
   ingress {
@@ -103,7 +103,7 @@ resource "aws_db_instance" "postgres" {
   for_each               = local.postgres_databases
   identifier             = "${var.project_name}-${each.key}-db-${var.environment}"
   engine                 = "postgres"
-  engine_version         = "15.7"
+  engine_version         = "15.13"
   instance_class         = "db.t3.micro"
   allocated_storage      = 20 # 20 GB (mínimo suportado pelo RDS)
   max_allocated_storage  = 50 # Auto-scaling de disco até 50 GB se necessário
