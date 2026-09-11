@@ -56,3 +56,24 @@ output "analytics_dynamodb_table" {
   value       = module.database.dynamodb_table_name
   description = "Nome da tabela DynamoDB de analytics"
 }
+
+# --- Cluster Kubernetes (EKS) ---
+output "eks_cluster_name" {
+  value       = module.eks.cluster_name
+  description = "Nome do Cluster EKS (use no comando: aws eks update-kubeconfig --name <cluster_name>)"
+}
+
+output "eks_cluster_endpoint" {
+  value       = module.eks.cluster_endpoint
+  description = "Endpoint HTTPS da API do Kubernetes Control Plane"
+}
+
+output "eks_cluster_certificate_authority_data" {
+  value       = module.eks.cluster_certificate_authority_data
+  description = "Certificado CA em Base64 para autenticação segura com o cluster"
+}
+
+output "eks_cluster_security_group_id" {
+  value       = module.eks.cluster_security_group_id
+  description = "ID do Security Group principal do cluster EKS"
+}

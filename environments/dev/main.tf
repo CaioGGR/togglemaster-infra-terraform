@@ -45,3 +45,20 @@ module "database" {
   private_subnet_ids = module.vpc.private_subnet_ids
   db_password        = var.db_password
 }
+
+# ------------------------------------------------------------------------------
+# 4. Módulo EKS (Cluster Kubernetes e Worker Nodes)
+# ------------------------------------------------------------------------------
+# Provisiona o Control Plane gerenciado e o grupo de nós EC2 nas subnets privadas:
+# - Recebe vpc_id e private_subnet_ids do módulo VPC
+# - Utiliza a 'LabRole' pré-configurada do AWS Academy
+# - Instâncias t3.medium escaláveis de 1 a 3 nós para os microsserviços e ArgoCD
+module "eks" {
+  source = "../../modules/eks"
+
+  project_name       = var.project_name
+  environment        = var.environment
+  vpc_id             = module.vpc.vpc_id
+  private_subnet_ids = module.vpc.private_subnet_ids
+  # node_instance_types utiliza o padrão ["t3.medium"] definido no módulo
+}
