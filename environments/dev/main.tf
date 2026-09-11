@@ -27,3 +27,21 @@ module "services_base" {
   project_name = var.project_name
   environment  = var.environment
 }
+
+# ------------------------------------------------------------------------------
+# 3. Módulo de Banco de Dados (RDS PostgreSQL, ElastiCache Redis e DynamoDB)
+# ------------------------------------------------------------------------------
+# Camada de persistência poliglota:
+# - Recebe vpc_id e private_subnet_ids diretamente do módulo VPC
+# - 3 instâncias isoladas PostgreSQL (auth, flag, targeting)
+# - 1 nó Redis em memória para cache do evaluation
+# - 1 tabela DynamoDB para eventos do analytics
+module "database" {
+  source = "../../modules/database"
+
+  project_name       = var.project_name
+  environment        = var.environment
+  vpc_id             = module.vpc.vpc_id
+  private_subnet_ids = module.vpc.private_subnet_ids
+  db_password        = var.db_password
+}

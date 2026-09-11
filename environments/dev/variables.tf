@@ -13,3 +13,10 @@ variable "environment" {
   type        = string
   default     = "dev"
 }
+
+variable "db_password" {
+  description = "Senha master para as instâncias RDS PostgreSQL"
+  type        = string
+  default     = "ToggleMaster2026SecurePass!"
+  sensitive   = true
+}

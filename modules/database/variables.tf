@@ -31,7 +31,6 @@ variable "private_subnet_ids" {
 
 variable "db_password" {
   type        = string
-  default     = "ToggleMaster2026SecurePass!"
   description = "Senha master de administrador para as instâncias do RDS PostgreSQL"
   sensitive   = true
 }
