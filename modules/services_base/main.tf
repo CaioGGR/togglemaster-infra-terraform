@@ -14,6 +14,7 @@ resource "aws_ecr_repository" "services" {
   for_each             = toset(var.service_names)
   name                 = "${var.project_name}-${each.value}"
   image_tag_mutability = "MUTABLE"
+  force_delete         = true # Permite exclusão pelo terraform destroy mesmo contendo imagens Docker
 
   image_scanning_configuration {
     scan_on_push = true
